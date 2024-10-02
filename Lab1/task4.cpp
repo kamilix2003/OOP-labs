@@ -3,11 +3,22 @@
 #include <time.h>
 #include <vector>
 
-int main(){
-    srand(time(NULL));
-    bool array_not_full = true;
-    std::vector<int> random_nums;
-    while(array_not_full){
-        random_nums.push_back(rand() % 9 + 1;);
+const int TICKET_COUNT = 5;
+
+class Lottery{
+    private:
+        srand(time(NULL));
+        int tickets[TICKET_COUNT];
+
+    void roll(){
+        int new_ticket = rand() % 9 + 1;
+
     }
+
+    bool repeated_ticket(int new_ticket){
+        
+    }
+}
+
+int main(){
 }
