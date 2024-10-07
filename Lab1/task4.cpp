@@ -11,6 +11,12 @@ class Lottery{
         int new_ticket;
 
     public:
+        Lottery(){
+            for(int i = 0; i < TICKET_COUNT; i++){
+                tickets[i] = 0;
+            }
+        }
+
         void roll(){
             for(int n_ticket = 0; n_ticket < TICKET_COUNT; n_ticket++){
                 // std::cout<< n_ticket << std::endl;
@@ -19,13 +25,13 @@ class Lottery{
                     tickets[n_ticket] = new_ticket;
                     // std::cout<< new_ticket << std::endl;
                 }
-                while(repeated_ticket(new_ticket));
+                while(repeated_ticket(new_ticket, n_ticket));
             }
         }
 
-        bool repeated_ticket(int new_ticket){
+        bool repeated_ticket(int new_ticket, int current_ticket){
             for(int i = 0; i < TICKET_COUNT; i++){
-                if(tickets[i] == new_ticket) return true;
+                if(i != current_ticket && tickets[i] == new_ticket) return true;
             }
             return false;
         }
