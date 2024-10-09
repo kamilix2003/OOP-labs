@@ -31,8 +31,14 @@ class Rational{
             add(rat);
         }
 
-        friend Rational mult(Rational& rat1, Rational& rat2);
-        friend Rational div(Rational& rat1, Rational& rat2);
+        friend void mult(Rational& rat1, Rational& rat2){
+            rat1.m_num *= rat2.m_num;
+            rat1.m_denum *= rat2.m_denum;
+        }
+        friend void div(Rational& rat1, Rational& rat2){
+            rat1.m_num *= rat2.m_denum;
+            rat1.m_denum *= rat2.m_num;
+        }
 
         void print(){
             std::cout << "Numerator: " << m_num << "\n";
@@ -40,15 +46,23 @@ class Rational{
         }
 };
 
-Rational mult(Rational rat1){
-    m_num *= rat.get_num();
-    m_denum *= rat.get_denum();
-}
-
-
 int main(){
-    Rational rat1(4, 3);
-    Rational rat2(3, 4);
+    Rational rat1(1, 3);
+    Rational rat2(1, 2);
+
+    std::cout<<"\nadd\n";
     rat1.add(rat2);
+    rat1.print();
+
+    std::cout<<"\nsub\n";
+    rat1.sub(rat2);
+    rat1.print();
+
+    std::cout<<"\nmult\n";
+    mult(rat1, rat2);
+    rat1.print();
+
+    std::cout<<"\ndiv\n";
+    div(rat1, rat2);
     rat1.print();
 }
