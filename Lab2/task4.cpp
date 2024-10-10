@@ -53,7 +53,22 @@ class SmartArray{
                 }
                 sorted_elements++;
             }
-            
+            if(direction){
+                invert();    
+            }
+        }
+
+        void invert(){
+            int* temp = new int[m_size];
+            for(int* i = m_begin; i < m_end; i++){
+                *temp = *i;
+                temp++;
+            }
+            for(int* i = m_begin; i < m_end; i++){
+                temp--;
+                *i = *temp;
+            }
+            delete temp;
         }
 
         void swap(int* ptr1, int* ptr2){
@@ -86,8 +101,11 @@ int main(){
     std::cout<<"Max value: "<<*sa.max(sa.begin(), sa.end())
     <<"\nMin value: "<<*sa.min(sa.begin(), sa.end())<<"\n";
 
-    sa.sort(1);
+    sa.sort(0);
     if(sa.is_sorted()) { std::cout<<"Array is sorted\n"; }
     else { std::cout<<"Array is not sorted\n"; }
+    sa.print();
+
+    sa.sort(1);
     sa.print();
 }
