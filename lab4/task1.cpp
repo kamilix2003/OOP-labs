@@ -13,6 +13,12 @@ class Fraction{
             m_denum = denum;
         }
 
+        Fraction(Fraction& frac):
+            m_num(frac.get_num()), m_denum(frac.get_denum())
+        {
+            std::cout<<"copied!\n";
+        }
+
         int get_num() const {return m_num;}
         int get_denum() const {return m_denum;}
         void set_num(int num) {m_num = num;}
@@ -21,84 +27,76 @@ class Fraction{
         friend Fraction operator+(const Fraction& lhs, const Fraction& rhs){
             return Fraction(lhs.m_num * rhs.m_denum + rhs.m_num * lhs.m_denum, lhs.m_denum * rhs.m_denum);
         }
-
         friend Fraction operator-(const Fraction& lhs, const Fraction& rhs){
             return Fraction(lhs.m_num * rhs.m_denum - rhs.m_num * lhs.m_denum, lhs.m_denum * rhs.m_denum);
         }
-
         friend Fraction operator*(const Fraction& lhs, const Fraction& rhs){
             return Fraction(lhs.m_num * rhs.m_num, lhs.m_denum * rhs.m_denum);
         }
-
         friend Fraction operator/(const Fraction& lhs, const Fraction& rhs){
             return Fraction(lhs.m_num * rhs.m_denum, lhs.m_denum * rhs.m_num);
         }
-
         friend std::ostream& operator<<(std::ostream& out, const Fraction& rat){
             out << rat.get_num() << "/" << rat.get_denum();
             return out;
         }
-
         friend std::istream& operator>>(std::istream& in, Fraction& rat){
             in >> rat.m_num;
             in >> rat.m_denum;
             return in;
         }
-
         friend bool operator>(const Fraction& lhs, const Fraction& rhs){
             if(lhs.m_num * rhs.m_denum > lhs.m_denum * rhs.m_num){
                 return true;
             }
             else return false;
         }
-
         friend bool operator<(const Fraction& lhs, const Fraction& rhs){
             if(lhs.m_num * rhs.m_denum > lhs.m_denum * rhs.m_num){
                 return false;
             }
             else return true;
         }
-
         friend bool operator==(const Fraction& lhs, const Fraction& rhs){
             if(lhs.m_num * rhs.m_denum == lhs.m_denum * rhs.m_num){
                 return true;
             }
             else return false;
         }
-
         friend bool operator!=(const Fraction& lhs, const Fraction& rhs){
             if(lhs.m_num * rhs.m_denum == lhs.m_denum * rhs.m_num){
                 return false;
             }
             else return true;
         }
+
+        Fraction& operator++(){
+            set_num(get_num()+1);
+            if(get_denum() == get_num()){
+                set_num(0);
+            }
+            return *this;
+        }
+        Fraction& operator++(int){
+            set_num(get_num()+1);
+            if(get_denum() == get_num()){
+                set_num(0);
+            }
+            return *this;
+        }
+        operator double() const {return double(m_num)/double(m_denum);}
+        Fraction& operator=(const Fraction& frac){
+            Fraction* o = new Fraction(frac.get_num(), frac.get_denum());
+            return *o;
+        }
 };
 
 int main(){
-    Fraction r1;
-    Fraction r2;
-    std::cout << "1st fractions: ";
-    std::cin >> r1;
-    // std::cout << r1 << "\n";
-    std::cout << "2st fractions: ";
-    std::cin >> r2;
-    // std::cout << r2 << "\n";
+    Fraction r1(3, 4);
+    Fraction r2(r1);
 
-    Fraction r3 = r1 + r2;
-    std::cout << "r1 + r2 = " << r3 << "\n";
+    std::cout<<r1<<"\n"<<float(++r2++)<<"\n";
+    r1 = r2;
+    std::cout<<r1;
 
-    Fraction r4 = r1 - r2;
-    std::cout << "r1 - r2 = " << r4 << "\n";
-
-    Fraction r5 = r1 * r2;
-    std::cout << "r1 * r2 = "<< r5 << "\n";
-
-    Fraction r6 = r1 / r2; 
-    std::cout << "r1 / r2 = "<< r6 << "\n";
-
-    std::cout << (r1 == r2 ? "r1 and r2 are equal\n" : "r1 and r2 are not equal\n");
-    std::cout << (r1 != r2 ? "r1 and r2 are not equal\n" : "r1 and r2 are equal\n");
-    std::cout << (r1 > r2 ? "r1 is greater than r2\n" : "r1 is less than r2\n");
-    std::cout << (r1 < r2 ? "r1 is less than r2\n" : "r1 is greater than r2\n");
-    
 }

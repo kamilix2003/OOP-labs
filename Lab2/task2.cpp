@@ -1,11 +1,11 @@
 #include <iostream>
 
-class Rational{
+class Fraction{
     int m_num;
     int m_denum;
 
     public:
-        Rational(int num = 0, int denom = 1){
+        Fraction(int num = 0, int denom = 1){
             m_num = num;
             m_denum = denom;
         }
@@ -15,7 +15,7 @@ class Rational{
         void set_num(int num) {m_num = num;}
         void set_denum(int denum) {m_denum = denum;}
 
-        void add(Rational rat){
+        void add(Fraction rat){
             if(m_denum == rat.get_denum()){
                 m_num += rat.get_num();
                 return;
@@ -26,16 +26,16 @@ class Rational{
             }
         }
 
-        void sub(Rational rat){
+        void sub(Fraction rat){
             rat.set_num(-rat.get_denum());
             add(rat);
         }
 
-        friend void mult(Rational& rat1, Rational& rat2){
+        friend void mult(Fraction& rat1, Fraction& rat2){
             rat1.m_num *= rat2.m_num;
             rat1.m_denum *= rat2.m_denum;
         }
-        friend void div(Rational& rat1, Rational& rat2){
+        friend void div(Fraction& rat1, Fraction& rat2){
             rat1.m_num *= rat2.m_denum;
             rat1.m_denum *= rat2.m_num;
         }
@@ -47,8 +47,8 @@ class Rational{
 };
 
 int main(){
-    Rational rat1(1, 3);
-    Rational rat2(1, 2);
+    Fraction rat1(1, 3);
+    Fraction rat2(1, 2);
 
     std::cout<<"\nadd\n";
     rat1.add(rat2);
