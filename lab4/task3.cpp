@@ -20,10 +20,12 @@ class Time{
         void print(){
             std::cout<< "Current time: " << m_hour << ":" << m_min << ":" << m_sec << "\n";
         }
-    operator std::string(){
-        
-    }
-
+        operator std::string(){
+            std::string o = std::to_string(m_hour) + ":"
+                        + std::to_string(m_min) + ":"
+                        + std::to_string(m_sec);
+            return o;
+        }
 };
 
 Time operator+(const Time& lhs, const Time& rhs){
@@ -46,10 +48,14 @@ Time operator+(const Time& lhs, const Time& rhs){
 }
 
 bool operator>(const Time& lhs, const Time& rhs){
-    if(lhs.get_hour() < rhs.get_hour()) {return false;}
-    else if(lhs.get_min() < rhs.get_min()) {return false;}
-    else if(lhs.get_sec() < rhs.get_sec()) {return false;}
-    return true;
+    if(lhs.get_hour() > rhs.get_hour()) {return true;}
+    if(lhs.get_hour() == rhs.get_hour()) {
+        if(lhs.get_min() > rhs.get_min()) {return true;}
+        if(lhs.get_min() == rhs.get_min()) {
+            if(lhs.get_sec() > rhs.get_sec()) {return true;}
+        }
+    }
+    return false;
 }
 
 int main(){
@@ -60,4 +66,6 @@ int main(){
     Time t3 = t1 + t2;
     t3.print();
     (t1>t2) ? std::cout<<"t1 greater\n" : std::cout<<"t2 greater\n";
+
+    std::cout<<"current time: " << std::string(t2);
 }
