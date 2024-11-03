@@ -19,8 +19,8 @@ class MyString : public std::string{
         }
 };
 
-std::ostream& operator<<(std::ostream& out, MyString& str){
-    out << str.data();
+std::ostream& operator<<(std::ostream& out, const char* str){
+    out << str;
     return out;
 }
 
@@ -100,5 +100,5 @@ int main(){
     Square s2(1, 2, 10, "square 1");
     s2.print();
 
-    // 6. Figure
+    // 6. Square
 }
