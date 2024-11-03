@@ -1,3 +1,9 @@
+/*
+    OOP / Lab 5 / Task 2
+    repo: https://github.com/kamilix2003/OOP-labs
+    Kamil Chaj
+*/
+
 #include <iostream>
 #include <algorithm>
 
